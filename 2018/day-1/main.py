@@ -2,7 +2,7 @@
 import json
 from pprint import pprint
 
-with open('C:/Users/chadsten/source/repos/AoC18/day-1/data.json') as data_file: 
+with open('C:/Users/chadsten/source/repos/advent-of-code/2018/day-1/data.json') as data_file: 
     data = json.load(data_file)
 
 ## determine the end frequency after applying all modifiers in the

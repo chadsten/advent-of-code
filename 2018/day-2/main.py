@@ -15,10 +15,11 @@ for s in data['strings']:
 	s.sort()
 	s = sorted(s, key=s.count, reverse=True) # second sort to put matching characters first
 
-	# these are just used for short circuiting once one has been set
+	# these are just used for short circuiting once one has been found
 	has_double = False
 	has_triple = False
 
+	# start checking the first 2-3 characters for matches in our sorted data
 	while len(s) > 1 and (has_double == False or has_triple == False):
 
 		# find triple first
@@ -26,18 +27,18 @@ for s in data['strings']:
 			if s[0] == s[2] and s[0] == s[1] and has_triple == False: # safety check middle val in case sorting fails
 				triples = triples + 1
 				has_triple = True
-				s = s[3:]
+				s = s[3:] # remove triple
 				continue
 	
 		# find double
 		if s[0] == s[1] and has_double == False:
 			doubles = doubles + 1
 			has_double = True
-			s = s[2:]
+			s = s[2:] # remove double
 			continue
 
 		# drop letter without match
 		else:
 			s = s[1:]
 
-print("There are " + str(doubles) + " doubles and " + str(triples) + " triples, for a hash of " + str(doubles*triples) + ".")
+print("There are " + str(doubles) + " doubles and " + str(triples) + " triples, for a hash of " + str(doubles * triples) + ".")

@@ -10,9 +10,10 @@ doubles = 0
 triples = 0
 
 for s in data['strings']:
-	# create array of sorted letters, so we can do array position match/trim
+	# create array of sorted by count letters, so we can do array position match/trim
 	s = list(s['value'])
 	s.sort()
+	s = sorted(s, key=s.count, reverse=True) # second sort to put matching characters first
 
 	# these are just used for short circuiting once one has been set
 	has_double = False
@@ -22,7 +23,7 @@ for s in data['strings']:
 
 		# find triple first
 		if len(s) > 2:
-			if s[0] == s[2] and has_triple == False:
+			if s[0] == s[2] and s[0] == s[1] and has_triple == False: # safety check middle val in case sorting fails
 				triples = triples + 1
 				has_triple = True
 				s = s[3:]

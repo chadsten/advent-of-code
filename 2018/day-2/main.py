@@ -42,3 +42,32 @@ for s in data['strings']:
 			s = s[1:]
 
 print("There are " + str(doubles) + " doubles and " + str(triples) + " triples, for a hash of " + str(doubles * triples) + ".")
+
+index = 0
+for s in data['strings']:
+	del data['strings'][index] # remove current value, it either matches or needs gone
+	index = index + 1 # keep track of index here, as it doesn't reset during the loop for above del
+	search = s
+	s = list(s['value']) # break into letters so postion comparison is just index alignment
+
+	for h in data['strings']:
+		fails = 0
+		matches = 0
+		match = ''
+		i = 0
+		haystack = h
+		h = list(h['value']) # create second list of letters for index alignment checking
+
+		while i < len(s): # loop check each letter
+
+			if (h[i] != s[i]):
+				fails = fails + 1
+			else:
+				matches = matches + 1
+				match = match + h[i]
+
+			i = i+1
+
+		if (fails < 2):
+			print(str(search) + " + " + str(haystack))
+			print(match)

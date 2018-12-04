@@ -2,7 +2,7 @@
 import json
 from pprint import pprint
 
-with open('C:/Users/chadsten/source/repos/advent-of-code/2018/day-3/data.json') as data_file: 
+with open('C:/Users/chadsten/source/repos/advent-of-code/2018/day-3/test.json') as data_file: 
 	data = json.load(data_file)
 
 # split our data up into parts
@@ -27,10 +27,10 @@ def mapInput(input):
 
 
 rows = dict()
+gift = ''
 
 for pattern in data['patterns']:
-	pattern = pattern['value']
-	pattern = mapInput(pattern) # break input into parts to map
+	pattern = mapInput(pattern['value']) # break input into parts to map
 	sc = int(pattern['top']) # starting row
 	sr = int(pattern['left']) # starting column
 
@@ -46,6 +46,24 @@ for pattern in data['patterns']:
 
 			rows[str(sr + i) + "-" + str(sc + j)] += 1
 			j += 1
+		i += 1
+
+for pattern in data['patterns']:
+	pattern = mapInput(pattern['value']) # break input into parts to map
+	sc = int(pattern['top']) # starting row
+	sr = int(pattern['left']) # starting column
+
+	i = 0
+	while i < int(pattern['width']): # foreach 'row'
+		j = 0
+		cf = 0
+		while j < int(pattern['height']): # foreach 'column'
+			if (rows[str(sr + i) + "-" + str(sc + j)] != 1):
+				break
+			j += 1
+		else:
+			print(pattern['id'])
+		break
 		i += 1
 
 counter = 0

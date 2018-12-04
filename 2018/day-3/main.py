@@ -2,7 +2,7 @@
 import json
 from pprint import pprint
 
-with open('C:/Users/chadsten/source/repos/advent-of-code/2018/day-3/test.json') as data_file: 
+with open('C:/Users/chadsten/source/repos/advent-of-code/2018/day-3/data.json') as data_file: 
 	data = json.load(data_file)
 
 # split our data up into parts
@@ -24,7 +24,6 @@ def mapInput(input):
 	mapped['height'] = input[1]
 	
 	return mapped
-
 
 rows = dict()
 gift = ''
@@ -52,20 +51,37 @@ for pattern in data['patterns']:
 	pattern = mapInput(pattern['value']) # break input into parts to map
 	sc = int(pattern['top']) # starting row
 	sr = int(pattern['left']) # starting column
-
+	cf = 0
 	i = 0
 	while i < int(pattern['width']): # foreach 'row'
 		j = 0
-		cf = 0
 		while j < int(pattern['height']): # foreach 'column'
-			if (rows[str(sr + i) + "-" + str(sc + j)] != 1):
-				break
+			if (rows[str(sr + i) + "-" + str(sc + j)] > 1):
+				cf += 1
 			j += 1
-		else:
-			print(pattern['id'])
-		break
 		i += 1
+	if (cf < 1):
+		print(pattern['id']) # part two, before part one in output only
+		break
 
+for pattern in data['patterns']:
+	pattern = mapInput(pattern['value']) # break input into parts to map
+	sc = int(pattern['top']) # starting row
+	sr = int(pattern['left']) # starting column
+	cf = 0
+	i = 0
+	while i < int(pattern['width']): # foreach 'row'
+		j = 0
+		while j < int(pattern['height']): # foreach 'column'
+			if (rows[str(sr + i) + "-" + str(sc + j)] > 1):
+				cf += 1
+			j += 1
+		i += 1
+	if (cf < 1):
+		print(pattern['id']) # part two, before part one in output only
+		break
+
+# print part 1
 counter = 0
 for key, value in rows.items():
 	if value > 1:

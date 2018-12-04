@@ -1,11 +1,12 @@
 # load data
 import json
-import re
 from pprint import pprint
 
 with open('C:/Users/chadsten/source/repos/advent-of-code/2018/day-3/data.json') as data_file: 
 	data = json.load(data_file)
 
+# split our data up into parts
+# ex: #1 @ 1,3: 4x4
 def mapInput(input):
 	mapped = dict()
 
@@ -21,32 +22,31 @@ def mapInput(input):
 	input = input[1].split('x')
 	mapped['width'] = input[0]
 	mapped['height'] = input[1]
-
+	
 	return mapped
+
 
 rows = dict()
 
 for pattern in data['patterns']:
 	pattern = pattern['value']
-	pattern = mapInput(pattern)
-	i = 0
-	sr = int(pattern['top']) + 1
-	sc = int(pattern['left']) + 1
+	pattern = mapInput(pattern) # break input into parts to map
+	sc = int(pattern['top']) # starting row
+	sr = int(pattern['left']) # starting column
 
-	while i < int(pattern['width']):
+	i = 0
+	while i < int(pattern['width']): # foreach 'row'
 		j = 0
-		while j < int(pattern['height']):
+		while j < int(pattern['height']): # foreach 'column'
 			try:
-				rows[str(sr + i) + "-" + str(sc + j)]
+				rows[str(sr + i) + "-" + str(sc + j)] # check if this has been hit yet
 
 			except KeyError:
 				rows[str(sr + i) + "-" + str(sc + j)] = 0
 
 			rows[str(sr + i) + "-" + str(sc + j)] += 1
-
 			j += 1
 		i += 1
-
 
 counter = 0
 for key, value in rows.items():

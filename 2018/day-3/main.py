@@ -25,10 +25,8 @@ def mapInput(input):
 	
 	return mapped
 
-rows = dict()
-gift = ''
-
 def buildData(patterns, mode):
+	rows = dict()
 	for pattern in patterns:
 		pattern = mapInput(pattern['value']) # break input into parts to map
 		sc = int(pattern['top']) # starting row
@@ -59,6 +57,8 @@ def buildData(patterns, mode):
 				return pattern['id'] # part two, before part one in output only
 				break
 
+gift = ''
+
 matches = buildData(data['patterns'], "map")
 
 # print part 1
@@ -68,6 +68,7 @@ for key, value in matches.items():
 		counter += 1
 
 print(counter)
+
 gift = buildData(data['patterns'], "gift")
 
 print(gift)

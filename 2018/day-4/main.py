@@ -18,15 +18,17 @@ for line in data:
 fmt = '%Y-%m-%d %H:%M'
 guards = dict()
 guard = 0
-
+print(split_data)
 for data in split_data:
 	p = split_data[data].split(' ')
+	print(p[1])
 
 	if (p[1] == "asleep"):
 		sleep = datetime.strptime(data, fmt)
 	elif (p[1] == 'up'):
 		wake = datetime.strptime(data, fmt)
 		minutes_diff = (wake - sleep).total_seconds() / 60.0
+		print(minutes_diff)
 		try:
 			guards[guard] # check if this has been hit yet
 
@@ -36,6 +38,7 @@ for data in split_data:
 		guards[guard] += minutes_diff
 	else:
 		guard = p[1][1:]
+		print(guard)
 
 
 h = 0

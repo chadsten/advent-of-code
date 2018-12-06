@@ -14,11 +14,13 @@ for line in data:
 	t = line.split('] ')
 	split_data[t[0][1:]] = t[1]
 	
-
 fmt = '%Y-%m-%d %H:%M'
 guards = dict()
 minutes = dict()
 guard = 0
+max_guard = 0
+max_minute = 0
+max_slept = 0
 
 for data in split_data:
 	p = split_data[data].split(' ')
@@ -47,6 +49,12 @@ for data in split_data:
 				minutes[guard][i] = 0
 
 			minutes[guard][i] += 1
+
+			if minutes[guard][i] > max_slept:
+				max_slept = minutes[guard][i]
+				max_minute = i
+				max_guard = guard
+
 			i += 1
 
 		# set the time the guard slept for total
@@ -59,8 +67,9 @@ for data in split_data:
 		guards[guard] += minutes_diff
 	else: # if it's not wake or sleep, it's guard change
 		guard = p[1][1:]
+
 		try:
-			minutes[guard] # check if this has been hit yet
+			minutes[guard] # we need a minute map created at the time of the guard assignment
 
 		except KeyError:
 			minutes[guard] = dict()
@@ -70,10 +79,12 @@ for guard in guards:
 	if (guards[guard] > h):
 		h = guards[guard]
 		g = guard
-print(g, h)
-print(minutes)
+#print(g, h)
+#print(minutes)
 
-minutes[g]
+#minutes[g]
 
-for min in minutes[g]:
-	print(min, minutes[g][min])
+#for min in minutes[g]:
+	#print(min, minutes[g][min])
+
+print(max_guard, max_minute)

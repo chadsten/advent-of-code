@@ -21,7 +21,6 @@ minutes = dict()
 guard = 0
 
 for data in split_data:
-	print('l')
 	p = split_data[data].split(' ')
 
 	if (p[1] == "asleep"):
@@ -31,17 +30,22 @@ for data in split_data:
 		minutes_diff = (wake - sleep).total_seconds() / 60.0
 
 		sm = str(sleep)[-5:]
-		sm = sm[:2]
+		sm = int(sm[:2])
 
 		wm = str(wake)[-5:]
-		wm = wm[:2]
+		wm = int(wm[:2])
 
 		print(sm, wm)
 		
-		i = int(sm)
-		m = int(wm)
+		i = sm
+		j = wm
 
-		while i < m:
+		if (i < j):
+			print("fuck you")
+
+		while i < j:
+			print("fuck you too")
+
 			try:
 				minutes[guard] # check if this has been hit yet
 
@@ -61,7 +65,6 @@ for data in split_data:
 		guards[guard] += minutes_diff
 	else:
 		guard = p[1][1:]
-		print('s')
 
 h = 0
 for guard in guards:

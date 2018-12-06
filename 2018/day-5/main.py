@@ -15,15 +15,27 @@ def reverse(s):
     str = i + str
   return str
 
-done = False
+max = 9900 # from day 1
+i = 0
+while i < 26:
+	test = data[0]
+	test = re.sub(alphabet[i][1:], "", test)
+	test = re.sub(reverse(alphabet[i])[1:], "", test)
 
-while done == False:
-	before = len(test)
-	for letter in alphabet:
-		test = re.sub(letter, "", test)
-		test = re.sub(reverse(letter), "", test)
-	after = len(test)
-	if (after == before):
-		done = True
+	# extract and run for day 1
+	done = False
+	while done == False:
+		before = len(test)
+		for letter in alphabet:
+			test = re.sub(letter, "", test)
+			test = re.sub(reverse(letter), "", test)
+		after = len(test)
+		if (after == before):
+			done = True
+	# end day 1 standalone
+	i += 1
 
-print(len(test))
+	if (len(test) < max):
+		max = len(test)
+
+print(max)

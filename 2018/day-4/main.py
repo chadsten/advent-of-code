@@ -34,26 +34,18 @@ for data in split_data:
 
 		wm = str(wake)[-5:]
 		wm = int(wm[:2])
-
-		print(sm, wm)
 		
 		i = sm
 		j = wm
 
-		if (i < j):
-			print("fuck you")
-
 		while i < j:
-			print("fuck you too")
-
 			try:
-				minutes[guard] # check if this has been hit yet
+				minutes[guard][i] # check if this has been hit yet
 
 			except KeyError:
-				minutes[guard] = 0
+				minutes[guard][i] = 0
 
 			minutes[guard][i] += 1
-			minutes[guard][i]
 			i += 1
 
 		try:
@@ -62,9 +54,11 @@ for data in split_data:
 		except KeyError:
 			guards[guard] = 0
 
+
 		guards[guard] += minutes_diff
 	else:
 		guard = p[1][1:]
+		minutes[guard] = dict()
 
 h = 0
 for guard in guards:
@@ -73,3 +67,6 @@ for guard in guards:
 		g = guard
 print(g, h)
 print(minutes)
+
+for min in minutes[g]:
+	print(minutes[g][min])

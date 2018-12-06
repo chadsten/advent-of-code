@@ -38,6 +38,7 @@ for data in split_data:
 		i = sm
 		j = wm
 
+		# set a minute map to show the frequency of minutes slept by guard
 		while i < j:
 			try:
 				minutes[guard][i] # check if this has been hit yet
@@ -48,17 +49,21 @@ for data in split_data:
 			minutes[guard][i] += 1
 			i += 1
 
+		# set the time the guard slept for total
 		try:
 			guards[guard] # check if this has been hit yet
 
 		except KeyError:
 			guards[guard] = 0
 
-
 		guards[guard] += minutes_diff
-	else:
+	else: # if it's not wake or sleep, it's guard change
 		guard = p[1][1:]
-		minutes[guard] = dict()
+		try:
+			minutes[guard] # check if this has been hit yet
+
+		except KeyError:
+			minutes[guard] = dict()
 
 h = 0
 for guard in guards:
@@ -68,5 +73,7 @@ for guard in guards:
 print(g, h)
 print(minutes)
 
+minutes[g]
+
 for min in minutes[g]:
-	print(minutes[g][min])
+	print(min, minutes[g][min])

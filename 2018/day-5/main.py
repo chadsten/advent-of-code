@@ -14,6 +14,7 @@ def reverse(s):
   for i in s: 
     str = i + str
   return str
+
 done = False
 
 while done == False:
@@ -25,5 +26,4 @@ while done == False:
 	if (after == before):
 		done = True
 
-print(test)
 print(len(test))
